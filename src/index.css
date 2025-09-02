@@ -1,0 +1,147 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Futuristic Portfolio Design System - Dark theme with neon accents
+All colors MUST be HSL.
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    /* Dark theme base colors */
+    --background: 240 10% 8%;
+    --foreground: 210 40% 98%;
+    
+    /* Card and surface colors */
+    --card: 240 10% 12%;
+    --card-foreground: 210 40% 98%;
+    
+    /* Neon accent colors */
+    --primary: 217 91% 60%; /* Neon blue */
+    --primary-foreground: 240 10% 8%;
+    --primary-glow: 217 91% 70%;
+    
+    --secondary: 267 83% 58%; /* Neon purple */
+    --secondary-foreground: 240 10% 8%;
+    --secondary-glow: 267 83% 68%;
+    
+    /* Muted colors for subtle elements */
+    --muted: 240 10% 16%;
+    --muted-foreground: 240 5% 65%;
+    
+    /* Accent and interaction colors */
+    --accent: 240 10% 20%;
+    --accent-foreground: 210 40% 98%;
+    
+    /* Functional colors */
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 210 40% 98%;
+    
+    /* Borders and inputs */
+    --border: 240 10% 20%;
+    --input: 240 10% 16%;
+    --ring: 217 91% 60%;
+    
+    /* Design tokens */
+    --radius: 0.75rem;
+    
+    /* Custom gradients */
+    --gradient-neon: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    --gradient-subtle: linear-gradient(180deg, hsl(var(--background)), hsl(var(--card)));
+    
+    /* Shadows and glows */
+    --shadow-neon: 0 0 20px hsl(var(--primary) / 0.3);
+    --shadow-neon-strong: 0 0 40px hsl(var(--primary) / 0.5);
+    --shadow-purple: 0 0 20px hsl(var(--secondary) / 0.3);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  /* Dark mode is default - no separate dark class needed */
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-poppins;
+    background-image: radial-gradient(circle at 20% 80%, hsl(var(--primary) / 0.1) 0%, transparent 50%),
+                      radial-gradient(circle at 80% 20%, hsl(var(--secondary) / 0.1) 0%, transparent 50%);
+  }
+  
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Neon glow effects */
+  .neon-glow {
+    box-shadow: var(--shadow-neon);
+    transition: var(--transition-smooth);
+  }
+  
+  .neon-glow:hover {
+    box-shadow: var(--shadow-neon-strong);
+  }
+  
+  .purple-glow {
+    box-shadow: var(--shadow-purple);
+  }
+  
+  /* Gradient text */
+  .gradient-text {
+    background: var(--gradient-neon);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Animated border */
+  .animated-border {
+    position: relative;
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+  }
+  
+  .animated-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    background: var(--gradient-neon);
+    border-radius: var(--radius);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    opacity: 0;
+    transition: var(--transition-smooth);
+  }
+  
+  .animated-border:hover::before {
+    opacity: 1;
+  }
+}
